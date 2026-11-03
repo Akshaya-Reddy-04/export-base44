@@ -1,0 +1,62 @@
+{
+  "name": "CrowdHistory",
+  "type": "object",
+  "properties": {
+    "mess_id": {
+      "type": "string"
+    },
+    "people_inside": {
+      "type": "number"
+    },
+    "queue_length": {
+      "type": "number"
+    },
+    "occupancy_pct": {
+      "type": "number"
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "hour_of_day": {
+      "type": "number"
+    },
+    "day_of_week": {
+      "type": "number"
+    },
+    "is_demo": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "mess_id"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "staff"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

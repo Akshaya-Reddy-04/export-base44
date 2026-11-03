@@ -1,0 +1,106 @@
+{
+  "name": "Attendance",
+  "type": "object",
+  "properties": {
+    "student_id": {
+      "type": "string"
+    },
+    "student_name": {
+      "type": "string"
+    },
+    "student_code": {
+      "type": "string"
+    },
+    "student_email": {
+      "type": "string"
+    },
+    "roll_number": {
+      "type": "string"
+    },
+    "mess_id": {
+      "type": "string"
+    },
+    "mess_name": {
+      "type": "string"
+    },
+    "entry_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "exit_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "date": {
+      "type": "string"
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "qr",
+        "manual"
+      ],
+      "default": "qr"
+    },
+    "recorded_by_name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "student_id",
+    "mess_id",
+    "entry_time"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.student_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "staff"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "staff"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "staff"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "name": "OccupancyRecord",
+  "type": "object",
+  "properties": {
+    "mess_id": {
+      "type": "string"
+    },
+    "mess_name": {
+      "type": "string"
+    },
+    "people_inside": {
+      "type": "number",
+      "default": 0
+    },
+    "students_eating": {
+      "type": "number",
+      "default": 0
+    },
+    "entries_today": {
+      "type": "number",
+      "default": 0
+    },
+    "exits_today": {
+      "type": "number",
+      "default": 0
+    },
+    "seats_blocked": {
+      "type": "number",
+      "default": 0
+    },
+    "updated_by_name": {
+      "type": "string"
+    },
+    "is_demo": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "mess_id"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "staff"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "staff"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "name": "MenuItem",
+  "type": "object",
+  "properties": {
+    "mess_id": {
+      "type": "string"
+    },
+    "mess_name": {
+      "type": "string"
+    },
+    "meal": {
+      "type": "string",
+      "enum": [
+        "breakfast",
+        "lunch",
+        "snacks",
+        "dinner"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "image_url": {
+      "type": "string"
+    },
+    "food_type": {
+      "type": "string",
+      "enum": [
+        "veg",
+        "non_veg",
+        "egg"
+      ],
+      "default": "veg"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "available",
+        "sold_out"
+      ],
+      "default": "available"
+    },
+    "total_quantity": {
+      "type": "number",
+      "default": 0
+    },
+    "remaining_quantity": {
+      "type": "number",
+      "default": 0
+    },
+    "prepared_quantity": {
+      "type": "number",
+      "default": 0
+    },
+    "served_quantity": {
+      "type": "number",
+      "default": 0
+    },
+    "wasted_quantity": {
+      "type": "number",
+      "default": 0
+    },
+    "plates_remaining": {
+      "type": "number",
+      "default": 0
+    },
+    "low_stock_threshold": {
+      "type": "number",
+      "default": 15
+    },
+    "serving_start": {
+      "type": "string"
+    },
+    "serving_end": {
+      "type": "string"
+    },
+    "allergens": {
+      "type": "string"
+    },
+    "is_special": {
+      "type": "boolean",
+      "default": false
+    },
+    "price": {
+      "type": "number",
+      "default": 0
+    },
+    "rating_avg": {
+      "type": "number",
+      "default": 0
+    },
+    "rating_count": {
+      "type": "number",
+      "default": 0
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_demo": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "mess_id",
+    "name",
+    "meal"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "staff"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "staff"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "staff"
+          }
+        }
+      ]
+    }
+  }
+}

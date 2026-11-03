@@ -1,0 +1,70 @@
+{
+  "name": "Mess",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name of the mess"
+    },
+    "code": {
+      "type": "string",
+      "description": "Short code, e.g. BH-01"
+    },
+    "hostel_type": {
+      "type": "string",
+      "enum": [
+        "boys",
+        "girls",
+        "coed"
+      ],
+      "default": "coed"
+    },
+    "location_label": {
+      "type": "string",
+      "description": "Campus location / block"
+    },
+    "capacity": {
+      "type": "number",
+      "description": "Total number of seats"
+    },
+    "open_time": {
+      "type": "string"
+    },
+    "close_time": {
+      "type": "string"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "notes": {
+      "type": "string"
+    },
+    "is_demo": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "name",
+    "capacity"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
